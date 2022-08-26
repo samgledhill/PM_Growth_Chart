@@ -3,15 +3,15 @@ library(tidyverse)
 
 ## Make some data
 
-df <- tibble(name = "Sam",
-             business = 2,
-             product = 1,
-             collaboration = 2,
-             leadership = 2,
-             strategy = 4,
-             tactics = 1,
-             users = 2,
-             industry = 3)
+df <- tibble(name = c("Sam","Fred", "Business"),
+             business = c(2,2,4),
+             product = c(1,2,5),
+             collaboration = c(2,3,4),
+             leadership = c(2,1,3),
+             strategy = c(4,3,4),
+             tactics = c(1,4,5),
+             users = c(2,4,4),
+             industry = c(3,3,5))
 
 df <- df %>% 
   pivot_longer(cols = business:industry, 
@@ -39,15 +39,20 @@ df %>%
   mutate(dimension = factor(dimension,
                             levels = unique(dimension),
                             labels = str_to_title(unique(dimension)))) %>%
-  ggplot(aes(x = dimension,
-           y = score)) +
-  geom_col(fill = "red",
-           alpha = 1,
-           width = 1) +
+  filter(name != "Fred") %>%
+  ggplot() +
+  geom_col(aes(x = dimension,
+               y = score,
+               fill = name,
+               colour = name),
+           alpha = 0.3,
+           width = 1,
+           position = "identity",
+           size = 2) +
   geom_hline(yintercept = seq(0, 5, by = 1),
-             color = "grey50", size = 0.8) +
+             color = "grey50", size = 0.5) +
   geom_vline(xintercept = seq(1.5, 7.5, by = 2),
-             color = "grey50", size = 0.8) +
+             color = "grey50", size = 0.5) +
   coord_polar(clip = "off") +
   theme(panel.grid = element_blank(),
         panel.background = element_blank(),
