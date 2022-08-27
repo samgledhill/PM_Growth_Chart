@@ -5,9 +5,10 @@ account: samgledhill
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6815572
-bundleId: 6220678
+bundleId: 6240325
 url: https://samgledhill.shinyapps.io/PM_Mo_Growth/
-when: 1660998388.34091
-lastSyncTime: 1660998388.34092
+when: 1661512653.94804
+lastSyncTime: 1661512653.94805
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: app_old.R
