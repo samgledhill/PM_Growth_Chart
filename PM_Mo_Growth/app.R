@@ -416,9 +416,18 @@ ui <- fluidPage(
                                 )
                        ),
                        tabPanel("Results",
-                                h3(textOutput("name")),
-                                plotOutput("plot"),
-                                tableOutput("values")
+                                column(
+                                  width = 6,
+                                  h3(textOutput("name")),
+                                  tableOutput("values")
+                                ),
+                                column(
+                                  width = 6,
+                                  plotOutput("plot")
+                                )
+                                
+                                
+                                
                                 )
            )
            
@@ -433,7 +442,7 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output) {
   output$name <- renderText({
-    paste0("Hello ", input$user_name, "!")
+    paste0("Hello ", input$user_name, ", here are your results.")
   })
   
   sliderValues <- reactive({
