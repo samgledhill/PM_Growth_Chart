@@ -481,15 +481,15 @@ server <- function(input, output) {
   
   output$plot <- renderPlot({
     df <- tibble(
-      name = input$user_name,
-      business = input$business,
-      product = input$product,
-      collaboration = input$collaboration,
-      leadership = input$leadership,
-      strategy = input$strategy,
-      tactics = input$tactics,
-      users = input$users,
-      industry = input$industry
+      name = c(input$user_name,"Business"),
+      business = c(input$business,4),
+      product = c(input$product,4),
+      collaboration = c(input$collaboration,4),
+      leadership = c(input$leadership,4),
+      strategy = c(input$strategy,4),
+      tactics = c(input$tactics,4),
+      users = c(input$users,4),
+      industry = c(input$industry,4)
     )
     
     df <- df %>%
@@ -505,11 +505,15 @@ server <- function(input, output) {
         levels = unique(dimension),
         labels = str_to_title(unique(dimension))
       )) %>%
-      ggplot(aes(x = dimension,
-                 y = score)) +
-      geom_col(fill = "red",
-               alpha = 1,
-               width = 1) +
+      ggplot() +
+      geom_col(aes(x = dimension,
+                   y = score,
+                   fill = name,
+                   colour = name),
+               alpha = 0.5,
+               width = 1,
+               position = "identity",
+               size = 2) +
       geom_hline(yintercept = seq(0, 5, by = 1),
                  color = "grey50",
                  size = 0.8) +
