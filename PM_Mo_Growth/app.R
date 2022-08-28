@@ -453,7 +453,7 @@ server <- function(input, output) {
         "Leadesrhip",
         "Collaboration"
       ),
-      Value = as.character(
+      Value = as.integer(
         c(
           input$users,
           input$industry,
@@ -466,7 +466,11 @@ server <- function(input, output) {
         )
       ),
       stringsAsFactors = FALSE
-    )
+    ) %>% 
+      left_join(table_data, 
+                by = c("Name" = "sub_domain", "Value" = "competency")) %>%
+      select(-domain) %>%
+      mutate(Value = round(Value, digits = 0))
     
   })
   
