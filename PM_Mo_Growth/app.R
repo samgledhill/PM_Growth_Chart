@@ -479,7 +479,8 @@ server <- function(input, output) {
       left_join(table_data, 
                 by = c("Name" = "sub_domain", "Value" = "competency")) %>%
       select(-domain) %>%
-      mutate(Value = round(Value, digits = 0))
+      rename(Narrative = example,
+             Domain = Name)
     
   })
   
@@ -490,7 +491,7 @@ server <- function(input, output) {
   
   output$plot <- renderPlot({
     df <- tibble(
-      name = c(input$user_name,"Business"),
+      name = c(input$user_name,"Best of the Best"),
       business = c(input$business,4),
       product = c(input$product,4),
       collaboration = c(input$collaboration,4),
