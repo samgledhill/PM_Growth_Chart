@@ -9,7 +9,7 @@ library(shiny)
 library(tidyverse)
 library(purrr)
 
-table_data <- read_csv("~/Projects/PM_Growth_Chart/table_data.csv")
+table_data <- read_csv("table_data.csv")
 
 # Define UI for application
 ui <- fluidPage(
