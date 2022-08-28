@@ -7,6 +7,9 @@
 
 library(shiny)
 library(tidyverse)
+library(purrr)
+
+table_data <- read_csv("~/Projects/PM_Growth_Chart/table_data.csv")
 
 # Define UI for application
 ui <- fluidPage(
@@ -445,6 +448,8 @@ server <- function(input, output) {
     paste0("Hello ", input$user_name, ", here are your results.")
   })
   
+  
+  
   sliderValues <- reactive({
     data.frame(
       Name = c(
@@ -457,7 +462,7 @@ server <- function(input, output) {
         "Leadesrhip",
         "Collaboration"
       ),
-      Value = as.character(
+      Value = as.integer(
         c(
           input$users,
           input$industry,
@@ -470,7 +475,11 @@ server <- function(input, output) {
         )
       ),
       stringsAsFactors = FALSE
-    )
+    ) %>% 
+      left_join(table_data, 
+                by = c("Name" = "sub_domain", "Value" = "competency")) %>%
+      select(-domain) %>%
+      mutate(Value = round(Value, digits = 0))
     
   })
   
