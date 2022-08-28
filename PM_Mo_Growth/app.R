@@ -422,6 +422,7 @@ ui <- fluidPage(
                                 column(
                                   width = 6,
                                   h3(textOutput("name")),
+                                  p(textOutput("max_text")),
                                   tableOutput("values")
                                 ),
                                 column(
@@ -449,17 +450,16 @@ server <- function(input, output) {
   })
   
   
-  
   sliderValues <- reactive({
     data.frame(
       Name = c(
         "Users",
         "Industry",
-        "The Business",
-        "The Product",
-        "Tactics (the trees)",
-        "Strategy (the forest)",
-        "Leadesrhip",
+        "Business",
+        "Product",
+        "Tactics",
+        "Strategy",
+        "Leadership",
         "Collaboration"
       ),
       Value = as.integer(
@@ -478,9 +478,10 @@ server <- function(input, output) {
     ) %>% 
       left_join(table_data, 
                 by = c("Name" = "sub_domain", "Value" = "competency")) %>%
-      select(-domain) %>%
       rename(Narrative = example,
-             Domain = Name)
+             Focus = Name,
+             Area = domain) %>%
+      select(Area, Focus, Value, Narrative)
     
   })
   
@@ -488,6 +489,19 @@ server <- function(input, output) {
   output$values <- renderTable({
     sliderValues()
   })
+  
+  max_domain <- reactive({
+    sliderValues() %>%
+      filter(Value == max(Value)) %>%
+      select(Area, Focus)
+    })
+  
+#  output$max_text <- renderText({
+#    paste0("Your highest rating domain was: ", 
+#           max_domain()[1], 
+#           ":", 
+#           max_domain()[2])
+#  })
   
   output$plot <- renderPlot({
     df <- tibble(
