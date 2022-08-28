@@ -32,10 +32,46 @@ ui <- fluidPage(
   fluidRow(
     column(12,
            
-           textInput("user_name",
-                     "What is your name?"),
-           
            tabsetPanel(type = "tabs",
+                       tabPanel("Introduction",
+                                
+                                h3("Thanks for using the Organa Product Manager Competency Framework Assessment Tool"),
+                      
+                                p("Let's start by getting to know who you are..."),
+                                
+                                textInput("user_name",
+                                          "What is your (first) name?"),
+                                
+                                p("Right, now let's get down to business.  This is very much a prototype tool and feedback is not only
+                                  welcome, but actively sought.  Please send through any and all feedback to:"),
+                                a("sam@movember.com", href = "mailto:sam@movember.com"),
+                                
+                                h4("How to use this tool"),
+                                
+                                tags$ol(
+                                  tags$li("For each tab, read the examples and assess your skills by selecting a score from 0 to 5 on the slider bar underneath the table"),
+                                  tags$li("Click yoiur way through each of the 4 domains, and be sure to work through each of the two sub-domains of each tab"),
+                                  tags$li("The last tab of the tool plays back to you your selections and maps these visually for you to see."),
+                                  tags$li("For now, the 'Business' expectation is hard-coded to be a consistent rating of 4 for each sub-domain, however in the future this will be bespoke for your organistion"),
+                                  tags$li("The chart to the right hand side of the summary page shows where you score in relation to the business expectation or best practice"),
+                                  tags$li("Use this visualisation to have a conversation with your manager on building skill and strength in areas where there is a gap between your report and best practice"),
+                                  tags$li("For areas where you show high skill - consider offering mentoring and coaching opportunities to others")
+                                ),
+                                
+                                h4("A list of non-prioritised opportunities for future development (a growing list.....)"),
+                                
+                                tags$ul(
+                                  tags$li("Create and store data in a database for later retrieval"),
+                                  tags$li("Collect inputs on one PM from multiple sources for a single PM"),
+                                  tags$li("Sample the 'business' for baselining"),
+                                  tags$li("Find a way to share the results with a manager"),
+                                  tags$li("THink about how to distirbute this to PM's in an organisation"),
+                                  tags$li("Once we have multiple reflections - how can we present this on the summary page?"),
+                                  tags$li("Automatic tips and opportunities for development based on differential between self-report and best in breed scores"),
+                                  tags$li("Can we take an org with multiple PM's and present an 'average' view?")
+                                )
+                                
+                                ),
                        tabPanel("Know your Market",
                                 tabsetPanel(type = "tabs",
                                             tabPanel("Users",
