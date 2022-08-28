@@ -7,6 +7,9 @@
 
 library(shiny)
 library(tidyverse)
+library(purrr)
+
+table_data <- read_csv("~/Projects/PM_Growth_Chart/table_data.csv")
 
 # Define UI for application
 ui <- fluidPage(
@@ -435,6 +438,8 @@ server <- function(input, output) {
   output$name <- renderText({
     paste0("Hello ", input$user_name, "!")
   })
+  
+  
   
   sliderValues <- reactive({
     data.frame(
